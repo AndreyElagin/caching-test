@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/stats")
@@ -22,7 +23,17 @@ public class GitHubController {
         return gitHubService.getTopGitHubRepos();
     }
 
-    @GetMapping("commiters")
+    @GetMapping("/userRepos")
+    public List<GitRepository> getUserRepositories(String userName) {
+        return gitHubService.getUserRepositories(userName);
+    }
+
+    @GetMapping("/userLanguages")
+    public Map<String, Integer> getUserLanguagesUsage(String userName) {
+        return gitHubService.getUserLanguagesUsage(userName);
+    }
+
+    @GetMapping("/commiters")
     public Contribution[] getCommitersInRepo(String repoOwner, String repoName) {
         return gitHubService.getRepoContributors(repoOwner, repoName);
     }
