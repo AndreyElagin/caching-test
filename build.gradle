@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '2.0.5.RELEASE'
+        springBootVersion = "2.0.5.RELEASE"
     }
     repositories {
         mavenCentral()
@@ -10,29 +10,35 @@ buildscript {
     }
 }
 
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
+apply plugin: "java"
+apply plugin: "eclipse"
+apply plugin: "org.springframework.boot"
+apply plugin: "io.spring.dependency-management"
 
-group = 'com.example'
-version = '0.0.1-SNAPSHOT'
+group = "com.example"
+version = "0.0.1-SNAPSHOT"
 sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
 }
 
+ext {
+    okHttpVersion = "3.11.0"
+    vavrVersion = "0.9.2"
+    infinispanVersion = "9.3.3.Final"
+}
 
 dependencies {
-    compile 'org.springframework.boot:spring-boot-starter-actuator'
-    compile 'org.springframework.boot:spring-boot-starter-webflux'
+    compile "org.springframework.boot:spring-boot-starter-actuator"
+    compile "org.springframework.boot:spring-boot-starter-webflux"
 
-    compile 'com.squareup.okhttp3:okhttp:3.11.0'
-    compile 'io.vavr:vavr:0.9.2'
+    compile "com.squareup.okhttp3:okhttp:$okHttpVersion"
+    compile "io.vavr:vavr:$vavrVersion"
+    compile "org.infinispan:infinispan-core:$infinispanVersion"
 
 
-    compileOnly 'org.projectlombok:lombok'
-    testCompile 'org.springframework.boot:spring-boot-starter-test'
-    testCompile 'io.projectreactor:reactor-test'
+    compileOnly "org.projectlombok:lombok"
+    testCompile "org.springframework.boot:spring-boot-starter-test"
+    testCompile "io.projectreactor:reactor-test"
 }
