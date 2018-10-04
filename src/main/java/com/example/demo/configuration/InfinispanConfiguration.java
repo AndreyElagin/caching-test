@@ -1,8 +1,8 @@
 package com.example.demo.configuration;
 
+import org.infinispan.Cache;
 import org.infinispan.configuration.cache.ConfigurationBuilder;
 import org.infinispan.manager.DefaultCacheManager;
-import org.infinispan.manager.EmbeddedCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,8 +12,9 @@ import java.util.concurrent.TimeUnit;
 public class InfinispanConfiguration {
 
     @Bean
-    public EmbeddedCacheManager embeddedCacheManager() {
-        return new DefaultCacheManager(
+    public Cache<String, String> embeddedCacheManager() {
+        DefaultCacheManager defaultCacheManager = new DefaultCacheManager();
+        defaultCacheManager.defineConfiguration("test-cache",
                 new ConfigurationBuilder()
                         .expiration()
                         .wakeUpInterval(10500)
@@ -21,6 +22,7 @@ public class InfinispanConfiguration {
                         .maxIdle(11, TimeUnit.SECONDS)
                         .build()
         );
+        return defaultCacheManager.getCache("test-cache");
     }
 
 }
